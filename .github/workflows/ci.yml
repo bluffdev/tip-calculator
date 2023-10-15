@@ -41,3 +41,22 @@ jobs:
 
       - name: Build Application
         run: pnpm build
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          build: pnpm build
+          start: pnpm start
+          wait-on: 'http://localhost:3000'

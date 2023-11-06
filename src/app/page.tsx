@@ -52,6 +52,17 @@ export default function Home() {
           className="bg-black border"
         />
         <label className="text-white">{`Tip Percentage: ${tipPercentage}%`}</label>
+        <div className="flex gap-2">
+          <button onClick={() => setTipPercentage(15)} className="border rounded-sm px-2 py-1">
+            15%
+          </button>
+          <button onClick={() => setTipPercentage(18)} className="border rounded-sm px-2 py-1">
+            18%
+          </button>
+          <button onClick={() => setTipPercentage(20)} className="border rounded-sm px-2 py-1">
+            20%
+          </button>
+        </div>
         <input
           type="range"
           min={5}

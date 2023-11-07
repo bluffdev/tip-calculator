@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [bill, setBill] = useState('');
-  const [tipPercentage, setTipPercentage] = useState(5);
+  const [tipPercentage, setTipPercentage] = useState('0');
   const [tipAmount, setTipAmount] = useState('0.00');
   const [total, setTotal] = useState('0.00');
   const [otherSelected, setOtherSelected] = useState(false);
@@ -13,6 +13,9 @@ export default function Home() {
     if (bill !== '') {
       setTipAmount(calculateTip(bill, tipPercentage).toFixed(2));
       setTotal((Number(bill) + Number(tipAmount)).toFixed(2));
+    } else if (bill === '') {
+      setTipAmount('0.00');
+      setTotal('0.00');
     }
   }, [bill, tipAmount, tipPercentage]);
 
@@ -26,13 +29,17 @@ export default function Home() {
     return true;
   }
 
-  function calculateTip(bill: string, tip: number): number {
+  function isValidPercent(number: string): boolean {
+    return /^\d+$/.test(number) || number === '';
+  }
+
+  function calculateTip(bill: string, tip: string): number {
     if (bill === '') {
       return 0;
     }
 
     const billNumber = Number(bill);
-    const tipNumber = billNumber * (tip / 100);
+    const tipNumber = billNumber * (Number(tip) / 100);
 
     return tipNumber;
   }
@@ -62,19 +69,28 @@ export default function Home() {
 
         <div className="flex gap-2 text-black">
           <button
-            onClick={() => setTipPercentage(15)}
+            onClick={() => {
+              setOtherSelected(false);
+              setTipPercentage('15');
+            }}
             className="bg-white border rounded-md px-3 py-1"
           >
             15%
           </button>
           <button
-            onClick={() => setTipPercentage(18)}
+            onClick={() => {
+              setOtherSelected(false);
+              setTipPercentage('18');
+            }}
             className="bg-white border rounded-md px-3 py-1"
           >
             18%
           </button>
           <button
-            onClick={() => setTipPercentage(20)}
+            onClick={() => {
+              setOtherSelected(false);
+              setTipPercentage('20');
+            }}
             className="bg-white border rounded-md px-3 py-1"
           >
             20%
@@ -90,11 +106,11 @@ export default function Home() {
         {otherSelected && (
           <input
             type="text"
-            value={bill}
+            value={tipPercentage}
             placeholder="0"
             onChange={(e) => {
-              if (isNumberAValidDollarAmount(e.target.value)) {
-                setBill(e.target.value);
+              if (isValidPercent(e.target.value)) {
+                setTipPercentage(e.target.value);
               }
             }}
             className="bg-neutral-900 focus:outline-none focus:ring-offset-1 focus:ring focus:ring-offset-neutral-300 focus:ring-neutral-500 rounded-md text-md p-2"

@@ -9,13 +9,6 @@ export const metadata: Metadata = {
   description: 'Calculate tips for restaurants and bars.',
   authors: [{ name: 'Brandon Rubio', url: 'https://bluff.dev' }],
   keywords: ['tip', 'calculator', 'restaurant', 'bar', 'service', 'gratuity', 'tip calculator'],
-  icons: [
-    {
-      url: 'https://i.kym-cdn.com/entries/icons/original/000/042/079/chopcrycover.jpg',
-      sizes: '16x16',
-      type: 'image/x-icon',
-    },
-  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

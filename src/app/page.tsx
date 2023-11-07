@@ -45,7 +45,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center p-24 mt-[2vh] lg:justify-center lg:mt-0">
       <div className="flex flex-col p-6 gap-4 lg:border lg:rounded-md">
         <label htmlFor="bill-input" className="text-white text-lg">
           Enter Bill
@@ -53,6 +53,7 @@ export default function Home() {
         <input
           id="bill-input"
           type="text"
+          inputMode="decimal"
           value={bill}
           placeholder="0.00"
           onChange={(e) => {
@@ -106,6 +107,7 @@ export default function Home() {
         {otherSelected && (
           <input
             type="text"
+            inputMode="decimal"
             value={tipPercentage}
             placeholder="0"
             onChange={(e) => {
